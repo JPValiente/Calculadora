@@ -5,10 +5,7 @@
  */
 package calculadoraipc2;
 
-/**
- *
- * @author anclenius
- */
+
 public class CalculadoraIPC2 {
 
     /**
