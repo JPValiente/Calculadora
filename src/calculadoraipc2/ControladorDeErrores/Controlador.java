@@ -1,6 +1,7 @@
 package ControladorDeErrores;
 
 import Backend.Calculos_Discretos;
+import Backend.Convertidor_Numerico;
 import SubMenuOperacionesBasicas.Divicion;
 import SubMenuOperacionesBasicas.Multiplicacion;
 import SubMenuOperacionesBasicas.Potencia;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 public class Controlador {
     public float separadorDeOperaciones(String operacion, String calculo){
         float resultado=0;
+        String resultadoTransformacion = null;
         if(operacion.equals("suma")){
             Suma suma = new Suma();
             try{

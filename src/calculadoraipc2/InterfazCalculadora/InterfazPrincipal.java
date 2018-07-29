@@ -2,7 +2,10 @@
 package InterfazCalculadora;
 
 import Backend.Calculos_Discretos;
+import Backend.Convertidor_Numerico;
 import ControladorDeErrores.Controlador;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
 
 public class InterfazPrincipal extends javax.swing.JFrame {
     float ultimoCalculo;
@@ -46,11 +49,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,6 +171,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTFIngresarDatos1.setEditable(false);
         jTFIngresarDatos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFIngresarDatos1ActionPerformed(evt);
@@ -185,6 +184,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 jButton43ActionPerformed(evt);
             }
         });
+
+        jTFResultado1.setEditable(false);
 
         jButton44.setText("AC");
         jButton44.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +202,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
 
         jButton46.setText("Decimal A Binario");
+        jButton46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton46ActionPerformed(evt);
+            }
+        });
 
         jButton47.setText("ANS");
         jButton47.addActionListener(new java.awt.event.ActionListener() {
@@ -210,6 +216,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
 
         jButton48.setText("Decimal A Octal");
+        jButton48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton48ActionPerformed(evt);
+            }
+        });
 
         jButton49.setText("<----");
         jButton49.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +230,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
 
         jButton50.setText("Decimal A Hexadecimal");
+        jButton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton50ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("P");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -318,7 +334,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTFIngresarDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -378,28 +394,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     .addContainerGap(73, Short.MAX_VALUE)))
         );
 
-        jMenu1.setText("Modo De Calculadora");
-
-        jMenu3.setText("Calculos Discretos");
-
-        jMenuItem5.setText("Factorial");
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem6.setText("Permutación (n, r)");
-        jMenu3.add(jMenuItem6);
-
-        jMenuItem7.setText("Combinación (n, r) ");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem7);
-
-        jMenu1.add(jMenu3);
-
-        jMenuBar1.add(jMenu1);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -421,10 +415,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         jTFIngresarDatos1.setText(jTFIngresarDatos1.getText()+"8");
@@ -559,9 +549,38 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Controlador controlador= new Controlador();
-        jTFIngresarDatos1.setText(jTFIngresarDatos1.getText()+"!");
+        jTFIngresarDatos1.setText(jTFIngresarDatos1.getText()+"toBin");
         jTFResultado1.setText(String.valueOf(controlador.separadorDeOperaciones("factorial", jTFIngresarDatos1.getText())));
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+        // TODO add your handling code here:\
+        String resultadoBinario = "";
+        try{
+            for(int i = Convertidor_Numerico.toBinary(Integer.parseInt(jTFIngresarDatos1.getText())).length()-1;i>=0;i--){
+                resultadoBinario = resultadoBinario + Convertidor_Numerico.toBinary(Integer.parseInt(jTFIngresarDatos1.getText())).charAt(i);
+            } 
+            jTFResultado1.setText(resultadoBinario);
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Lo que ingreso es invalido");
+        }
+        
+    }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
+        // TODO add your handling code here:
+        try{
+             
+            jTFResultado1.setText(Convertidor_Numerico.toOctal(Integer.parseInt(jTFIngresarDatos1.getText())));
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Lo que ingreso es invalido");
+        }
+    }//GEN-LAST:event_jButton48ActionPerformed
+
+    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
+        // TODO add your handling code here:
+        jTFResultado1.setText(Integer.toHexString(Integer.parseInt(jTFIngresarDatos1.getText())));
+    }//GEN-LAST:event_jButton50ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -592,12 +611,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
     private javax.swing.JButton jButton50;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTFIngresarDatos1;
     private javax.swing.JTextField jTFResultado1;

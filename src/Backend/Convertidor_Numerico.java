@@ -13,25 +13,29 @@ import java.util.List;
  */
 public class Convertidor_Numerico {
     
-    public static String binario(int numeroDecimal){
+    public static String toBinary(int numeroDecimal){
         if(numeroDecimal == 1){
             return "1";
         } else if(numeroDecimal%2 == 0){
-            return "0" + binario(numeroDecimal / 2);     
+            return "0" + toBinary(numeroDecimal / 2);     
         } else {
-            return "1" + binario(numeroDecimal / 2);
+            return "1" + toBinary(numeroDecimal / 2);
         }
     }
     
-    public static int octal(int numeroDecimal){       
-        if (numeroDecimal < 8){
-            return numeroDecimal;
-        }
-        else {
-            return octal(numeroDecimal/8);
-           
-        }       
-    }
+    public static String toOctal(int decimal){    
+    int residuo;  
+    String octal="";   
+    char octalchars[]={'0','1','2','3','4','5','6','7'};  
+   
+    while(decimal>0)  
+    {  
+       residuo=decimal%8;   
+       octal=octalchars[residuo]+octal;   
+       decimal=decimal/8;  
+    }  
+    return octal;  
+}    
     
     
 }
