@@ -1,5 +1,6 @@
 package ControladorDeErrores;
 
+import Backend.Calculos_Discretos;
 import SubMenuOperacionesBasicas.Divicion;
 import SubMenuOperacionesBasicas.Multiplicacion;
 import SubMenuOperacionesBasicas.Potencia;
@@ -56,6 +57,27 @@ public class Controlador {
                 JOptionPane.showMessageDialog(null, "Uno De Los Numeros Es Invalido");
             }
         }
+        else if(operacion.equals("permutacion")){
+            try{
+                resultado=Calculos_Discretos.permutacion(separador(calculo,"P"));
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Uno De Los Numeros Es Invalido");
+            }
+        }
+        else if(operacion.equals("combinacion")){
+            try{
+                resultado=Calculos_Discretos.combinacion(separador(calculo,"C"));
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Uno De Los Numeros Es Invalido");
+            }
+        }else if(operacion.equals("factorial")){
+            try{
+                resultado=Calculos_Discretos.factorial((int)separador(calculo,"!")[0]);
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Uno De Los Numeros Es Invalido");
+            }
+        }
+        
         return resultado;
     }
     
