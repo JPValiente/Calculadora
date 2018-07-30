@@ -549,7 +549,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Controlador controlador= new Controlador();
-        jTFIngresarDatos1.setText(jTFIngresarDatos1.getText()+"toBin");
+        jTFIngresarDatos1.setText(jTFIngresarDatos1.getText()+"!");
         jTFResultado1.setText(String.valueOf(controlador.separadorDeOperaciones("factorial", jTFIngresarDatos1.getText())));
     }//GEN-LAST:event_jButton3ActionPerformed
 
